@@ -43,14 +43,19 @@ public class Cuentas extends HttpServlet {
         LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
         //CuentasServicios cus = new CuentasServicios();
         String op = request.getParameter("op");
-        String id = request.getParameter("id");
-        String nombre = request.getParameter("nombre");
-        String fecha = request.getParameter("fecha");
-        String mayor = request.getParameter("mayor");
+        String numerocu = request.getParameter("cu_ncu");
+        char ultimonum= numerocu.charAt(9);
+        String nuevenum= numerocu.substring(0,8);
+        String dn1cu = request.getParameter("cu_dn1");
+        String dn2cu = request.getParameter("cu_dn2");
+        String salariocu = request.getParameter("cu_sal");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        boolean correcto = false;
         switch (op)
         {
             case "insert":
+                //aqui hay que comprbar
+                if()
                 Date fechaDate = format.parse(fecha);
             //    a.setNombre(nombre);
                 if (fecha != null)
