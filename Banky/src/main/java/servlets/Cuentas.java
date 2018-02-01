@@ -42,15 +42,31 @@ public class Cuentas extends HttpServlet {
         Cuenta m = new Cuenta();
         LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
         //CuentasServicios cus = new CuentasServicios();
+        boolean cu_ncu_correcto = false;
         String op = request.getParameter("op");
         String numerocu = request.getParameter("cu_ncu");
-        char ultimonum= numerocu.charAt(9);
-        String nuevenum= numerocu.substring(0,8);
+        String ultimonum = numerocu.charAt(9)+"";
+        int numeor=Integer.parseInt(ultimonum);
+        int contador =0;        //123456789
+        for(int i=0;i<numerocu.length();i++){
+            if(i<numerocu.length()-1){
+            contador+=Integer.parseInt(numerocu.charAt(i)+"");
+            }
+            else{
+                if(contador%numerocu.length()==Integer.parseInt(ultimonum)){
+                    //numero de cuenta correcto
+                    cu_ncu_correcto=true;
+                }
+                else
+                    //numero de cuenta incorrecto
+                    cu_ncu_correcto=false;
+            }
+        }
         String dn1cu = request.getParameter("cu_dn1");
         String dn2cu = request.getParameter("cu_dn2");
         String salariocu = request.getParameter("cu_sal");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        boolean correcto = false;
+        
         switch (op)
         {
             case "insert":
