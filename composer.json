@@ -1,0 +1,11 @@
+{
+    "name": "vendor/banky-php",
+    "description": "Description of project BankyPhp.",
+    "authors": [
+        {
+            "name": "Rafa",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {}
+}
