@@ -43,54 +43,19 @@ public class Clientes extends HttpServlet {
         LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
         //ClientesServicios cls = new MovimientosServicios();
         String op = request.getParameter("op");
-        String id = request.getParameter("id");
-        String nombre = request.getParameter("nombre");
-        String fecha = request.getParameter("fecha");
-        String mayor = request.getParameter("mayor");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         switch (op)
         {
             case "insert":
-                Date fechaDate = format.parse(fecha);
-            //    a.setNombre(nombre);
-                if (fecha != null)
-                {
-                  //  a.setFecha_nacimiento(fechaDate);
-                } else
-                {
-                    //a.setFecha_nacimiento(Date.from(local.atStartOfDay().toInstant(ZoneOffset.UTC)));
-                }
-
-                if ("on".equals(mayor))
-                {
-                  //  a.setMayor_edad(Boolean.TRUE);
-                } else
-
-                {
-                    //a.setMayor_edad(Boolean.FALSE);
-                }
-                //as.addAlumno(a);
                
                 break;
 
             case "delete":
-                //a.setId(Long.parseLong(id));
-                //as.delAlumno(a);
+          
 
                 break;
             case "update":
-//                fechaDate = format.parse(fecha);
-//                a.setId(Long.parseLong(id));
-//                a.setNombre(nombre);
-//                a.setFecha_nacimiento(fechaDate);
-                if ("on".equals(mayor))
-                {
-//                    a.setMayor_edad(Boolean.TRUE);
-                } else
-                {
-//                    a.setMayor_edad(Boolean.FALSE);
-                }
-//                as.updateAlumno(a);
+
                 break;
             default:
                 //request.setAttribute("alumnos", ms.getAllMovimientos());

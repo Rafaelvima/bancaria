@@ -16,32 +16,5 @@ import model.Cuenta;
 public class CuentasServicios
 {
 
-    public List<Cuenta> getAllCuentas()
-    {
-        CuentasDAO dao = new CuentasDAO();
-
-        return dao.getAllCuentas();
-    }
-
-    public Cuenta addAsig(Cuenta cuentaNuevo)
-    {
-        CuentasDAO dao = new CuentasDAO();
-
-        return dao.addAsig(cuentaNuevo);
-    }
-
-    public void delAsig(Cuenta cuentaNuevo)
-    {
-        CuentasDAO dao = new CuentasDAO();
-
-        dao.delAsig(cuentaNuevo);
-    }
-
-    public void updateAsig(Cuenta cuentaNuevo)
-    {
-        CuentasDAO dao = new CuentasDAO();
-
-        dao.updateAsig(cuentaNuevo);
-    }
 
 }

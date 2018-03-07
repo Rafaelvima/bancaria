@@ -71,26 +71,7 @@ public class Cuentas extends HttpServlet {
         {
             case "insert":
                 //aqui hay que comprbar
-                if()
-                Date fechaDate = format.parse(fecha);
-            //    a.setNombre(nombre);
-                if (fecha != null)
-                {
-                  //  a.setFecha_nacimiento(fechaDate);
-                } else
-                {
-                    //a.setFecha_nacimiento(Date.from(local.atStartOfDay().toInstant(ZoneOffset.UTC)));
-                }
-
-                if ("on".equals(mayor))
-                {
-                  //  a.setMayor_edad(Boolean.TRUE);
-                } else
-
-                {
-                    //a.setMayor_edad(Boolean.FALSE);
-                }
-                //as.addAlumno(a);
+                
                
                 break;
 
@@ -104,22 +85,15 @@ public class Cuentas extends HttpServlet {
 //                a.setId(Long.parseLong(id));
 //                a.setNombre(nombre);
 //                a.setFecha_nacimiento(fechaDate);
-                if ("on".equals(mayor))
-                {
-//                    a.setMayor_edad(Boolean.TRUE);
-                } else
-                {
-//                    a.setMayor_edad(Boolean.FALSE);
-                }
-//                as.updateAlumno(a);
+              
                 break;
             default:
                 //request.setAttribute("alumnos", ms.getAllMovimientos());
-                request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+                //request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
 
         }
        // request.setAttribute("alumnos", as.getAllAlumnos());
-        request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+       // request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
