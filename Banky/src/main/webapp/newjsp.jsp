@@ -23,13 +23,29 @@
                 document.getElementById("mayorEdad").checked = mayor;
 
             }
+            function iniciarSesion(){
+                var numCuenta=document.getElementById("num_cuenta").value;
+                var dn1=document.getElementById("dni1").value;
+                var dn2=document.getElementById("dni2").value;
+                $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8083/Banky/clientes",
+                    data:$("#form1").serialize(),
+                        success : function (data){
+                            
+                        }
+                    
+                })
+            }
         </script>
     </head>
     <body>
         <h1>Hello World!</h1>
+        <form id="form1" action="clientes">
         <input id="num_cuenta" value="1234567890">
         <input id="dni1" value="12345678j">
         <input id="dni2" value="12345678j">
-        <input type="button" value="iniciar sersion" id=""
+        <input type="button" id="op" value="iniciarS" onclick="iniciarSesion();">
+        </form>
     </body>
 </html>

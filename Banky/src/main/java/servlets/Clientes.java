@@ -46,6 +46,9 @@ public class Clientes extends HttpServlet {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         switch (op)
         {
+            case "iniciarS":
+               
+                break;
             case "insert":
                
                 break;
