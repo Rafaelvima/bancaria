@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
+import servicios.ClientesServicios;
 
 /**
  *
@@ -38,23 +40,32 @@ public class Clientes extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-           throws ServletException, IOException, ParseException { 
+            throws ServletException, IOException, ParseException {
         Clientes m = new Clientes();
         LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
-        //ClientesServicios cls = new MovimientosServicios();
+        ClientesServicios cls = new ClientesServicios();
         String op = request.getParameter("op");
+        String dni1 = request.getParameter("dni1");
+        String dni2 = request.getParameter("dni2");
+        String num_cuenta = request.getParameter("num_cuenta");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        switch (op)
-        {
-            case "iniciarS":
+        List<Cliente> clientes =cls.getAllClientes();
+
+        
+        switch (op) {
+            case "all":
                
+                request.setAttribute("clientes", clientes);
+                request.getRequestDispatcher("PintarClientes.jsp").forward(request, response);
+                break;
+            case "iniciarS":
+
                 break;
             case "insert":
-               
+
                 break;
 
             case "delete":
-          
 
                 break;
             case "update":
@@ -65,8 +76,8 @@ public class Clientes extends HttpServlet {
                 request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
 
         }
-       // request.setAttribute("alumnos", as.getAllAlumnos());
-        request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+        request.setAttribute("clientes", clientes);
+                request.getRequestDispatcher("PintarClientes.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

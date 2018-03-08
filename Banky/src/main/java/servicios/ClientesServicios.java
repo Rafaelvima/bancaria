@@ -6,6 +6,7 @@
 package servicios;
 
 import dao.ClientesDAO;
+import java.util.List;
 import model.Cliente;
 
 /**
@@ -13,4 +14,9 @@ import model.Cliente;
  * @author oscar
  */
 public class ClientesServicios {
+
+     public List<Cliente> getAllClientes() {
+        ClientesDAO dao = new ClientesDAO();
+        return dao.getAllClientesDBUils();
+    }
     }
