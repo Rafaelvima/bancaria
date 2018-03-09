@@ -14,7 +14,7 @@ import javax.servlet.ServletContextListener;
 /**
  * Web application lifecycle listener.
  *
- * @author Miguel Angel Diaz
+ * @author oscar
  */
 public class ConfigListener implements ServletContextListener {
 

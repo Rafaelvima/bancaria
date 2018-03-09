@@ -6,13 +6,14 @@
 package config;
 
 import freemarker.template.TemplateExceptionHandler;
+import java.io.File;
 import java.io.InputStream;
 import javax.servlet.ServletContext;
 import org.yaml.snakeyaml.Yaml;
 
 /**
  *
- * @author Miguel Angel Diaz
+ * @author oscar
  */
 public class Configuration {
 
@@ -61,8 +62,17 @@ public class Configuration {
     private String smtpServer;
     private String smtpPort;
     private String mailPass;
-    private int minutosParaValidar;
-    private int longitudCodigo;
+    private int maxTiempo;
+
+    public int getMaxTiempo()
+    {
+        return maxTiempo;
+    }
+
+    public void setMaxTiempo(int maxTiempo)
+    {
+        this.maxTiempo = maxTiempo;
+    }
     
 
     private freemarker.template.Configuration freeMarker;
@@ -139,22 +149,6 @@ public class Configuration {
 
     public void setMailPass(String mailPass) {
         this.mailPass = mailPass;
-    }
-    
-    public int getMinutosParaValidar(){
-        return minutosParaValidar;
-    }
-    
-    public void setMinutosParaValidar(int minutosParaValidar){
-        this.minutosParaValidar = minutosParaValidar;
-    }
-    
-    public int getLongitudCodigo(){
-        return longitudCodigo;
-    }
-    
-    public void setLongitudCodigo(int longitudCodigo){
-        this.longitudCodigo = longitudCodigo;
     }
 
 }

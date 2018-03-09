@@ -59,7 +59,7 @@ public class Clientes extends HttpServlet {
                 request.getRequestDispatcher("PintarClientes.jsp").forward(request, response);
                 break;
             case "iniciarS":
-
+                
                 break;
             case "insert":
 

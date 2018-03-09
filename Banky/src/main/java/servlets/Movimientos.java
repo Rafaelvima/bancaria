@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Movimiento;
+import servicios.MovimientosServicios;
 
 /**
  *
@@ -42,41 +43,22 @@ public class Movimientos extends HttpServlet {
             throws ServletException, IOException, ParseException { 
         Movimiento m = new Movimiento();
         LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
-        //MovimientosServicios ms = new MovimientosServicios();
+        MovimientosServicios ms = new MovimientosServicios();
         String op = request.getParameter("op");
-        String id = request.getParameter("id");
-        String nombre = request.getParameter("nombre");
-        String fecha = request.getParameter("fecha");
-        String mayor = request.getParameter("mayor");
+        String mo_ncu = request.getParameter("mo_ncu");
+        String fechaini = request.getParameter("fechaini");
+        String fechafin = request.getParameter("fechafin");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         switch (op)
         {
-            case "insert":
-                Date fechaDate = format.parse(fecha);
-            //    a.setNombre(nombre);
-                if (fecha != null)
-                {
-                  //  a.setFecha_nacimiento(fechaDate);
-                } else
-                {
-                    //a.setFecha_nacimiento(Date.from(local.atStartOfDay().toInstant(ZoneOffset.UTC)));
-                }
-
-                if ("on".equals(mayor))
-                {
-                  //  a.setMayor_edad(Boolean.TRUE);
-                } else
-
-                {
-                    //a.setMayor_edad(Boolean.FALSE);
-                }
-                //as.addAlumno(a);
+            case "ver":
+               String mismovis = ms.verMovimientos(mo_ncu,fechaini,fechafin);
+                response.getWriter().write(mismovis);
                
                 break;
 
             case "delete":
-                //a.setId(Long.parseLong(id));
-                //as.delAlumno(a);
+                
 
                 break;
             case "update":
@@ -84,14 +66,7 @@ public class Movimientos extends HttpServlet {
 //                a.setId(Long.parseLong(id));
 //                a.setNombre(nombre);
 //                a.setFecha_nacimiento(fechaDate);
-                if ("on".equals(mayor))
-                {
-//                    a.setMayor_edad(Boolean.TRUE);
-                } else
-                {
-//                    a.setMayor_edad(Boolean.FALSE);
-                }
-//                as.updateAlumno(a);
+               
                 break;
             default:
                 //request.setAttribute("alumnos", ms.getAllMovimientos());
@@ -99,7 +74,7 @@ public class Movimientos extends HttpServlet {
 
         }
        // request.setAttribute("alumnos", as.getAllAlumnos());
-        request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+        //request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

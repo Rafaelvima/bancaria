@@ -12,12 +12,21 @@ import java.time.LocalDateTime;
  * @author rafa
  */
 public class Movimiento {
+    private String mo_ncu;
     private LocalDateTime mo_fec;
     private String mo_hor;
     private String mo_des;
     private int mo_imp;
     public Movimiento(){
         
+    }
+
+    public String getMo_ncu() {
+        return mo_ncu;
+    }
+
+    public void setMo_ncu(String mo_ncu) {
+        this.mo_ncu = mo_ncu;
     }
 
     public LocalDateTime getMo_fec() {

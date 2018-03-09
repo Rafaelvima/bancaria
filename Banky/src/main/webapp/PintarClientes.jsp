@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,20 +20,25 @@
         
         <table border="1">
              <tr> 
-                    <td>
-                        ID_parada
-                    </td>
-                    <td>
-                        Tiempo restante
-                    </td>
+                    <th>
+                       DNI Cliente
+                    </th>
+                    <th>
+                        Nombre Cliente
+                    </th>
                         
-                    <td>
-                      Distancia
-                    </td>
-
-                    <td>
-                        Tipo de posicion
-                        </td>
+                    <th>
+                        Telefono
+                    </th>
+                    <th>
+                        Numero de cuentas
+                    </th>
+                     <th>
+                        Salario
+                    </th>
+                    </tr>
+                    <tr>
+                        ${clientes}
                     </tr>
             <c:forEach items="${clientes}" var="cliente">  
                 <tr> 
@@ -39,8 +48,19 @@
                     <td>
                         ${cliente.cl_nom}
                     </td>
+                     <td>
+                        ${cliente.cl_tel}
+                    </td>
+                    <td>
+                        ${cliente.cl_ncu}
+                    </td>
+                    <td>
+                        ${cliente.cl_sal}
+                    </td>
+                    
                        
                     </tr>
+                    
 
 
             </c:forEach> 
