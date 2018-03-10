@@ -20,14 +20,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Cuenta;
 import model.Movimiento;
+import servicios.CuentasServicios;
 import servicios.MovimientosServicios;
 
 /**
  *
  * @author rafa
  */
-@WebServlet(name = "Movimientos", urlPatterns = {"/movimientos"})
+@WebServlet(name = "Movimientos", urlPatterns = {"/secure/movimientos","/rest/movimientos"})
 public class Movimientos extends HttpServlet {
 
     /**
@@ -43,12 +45,16 @@ public class Movimientos extends HttpServlet {
             throws ServletException, IOException, ParseException { 
         Movimiento m = new Movimiento();
         LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
+        CuentasServicios cus = new CuentasServicios();
         MovimientosServicios ms = new MovimientosServicios();
         String op = request.getParameter("op");
         String mo_ncu = request.getParameter("mo_ncu");
+        String cu_sal = request.getParameter("cu_sal");
+        int pasta= Integer.parseInt(cu_sal);
         String fechaini = request.getParameter("fechaini");
         String fechafin = request.getParameter("fechafin");
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Cuenta existecu=cus.existeCuenta(mo_ncu);
         switch (op)
         {
             case "ver":
@@ -57,24 +63,23 @@ public class Movimientos extends HttpServlet {
                
                 break;
 
-            case "delete":
-                
-
+            case "ingresar":
+              
+                if(  ms.ingresar(mo_ncu, Date.from(local.atStartOfDay().toInstant(ZoneOffset.UTC)), pasta) && cus.updateSalCliente(existecu,mo_ncu,  pasta))
+                        response.getWriter().write("<h1>ingresado correctamente</h1>");
+                else  response.getWriter().write("<h1>erro al ingresar</h1>");
                 break;
-            case "update":
-//                fechaDate = format.parse(fecha);
-//                a.setId(Long.parseLong(id));
-//                a.setNombre(nombre);
-//                a.setFecha_nacimiento(fechaDate);
+            case "retirar":
+             if( ms.ingresar(mo_ncu, Date.from(local.atStartOfDay().toInstant(ZoneOffset.UTC)), pasta*-1) && cus.updateSalCliente(existecu,mo_ncu,  pasta*-1))
+                        response.getWriter().write("<h1>ingresado correctamente</h1>");
+                else  response.getWriter().write("<h1>erro al retirar</h1>");
                
                 break;
             default:
-                //request.setAttribute("alumnos", ms.getAllMovimientos());
-                request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+
 
         }
-       // request.setAttribute("alumnos", as.getAllAlumnos());
-        //request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

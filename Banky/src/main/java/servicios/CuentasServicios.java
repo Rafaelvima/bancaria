@@ -21,5 +21,19 @@ public class CuentasServicios
        return dao.existeCuenta(numerocu);
     }
 
+    public void addCuenta(String numerocu, String dn1cu, String dn2cu, int salariocu) {
+       CuentasDAO dao = new CuentasDAO();
+       dao.addCuenta(numerocu,dn1cu,dn2cu,salariocu);
+    }
+
+    public void addCuenta2(String numerocu, String dn1cu, int salariocu) {
+       CuentasDAO dao = new CuentasDAO();
+       dao.addCuenta2(numerocu,dn1cu,salariocu);
+    }
+    public boolean updateSalCliente(Cuenta c,String a, int b) {
+        CuentasDAO dao = new CuentasDAO();
+       return dao.updateSalCliente(c,a,b);
+    }
+
 
 }

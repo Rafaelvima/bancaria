@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Movimiento;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -27,8 +28,28 @@ public class MovimientosDAO {
         mv = jtm.query("Select * from movimientos where mo_ncu = ? and mo_fec between ? and ?",new BeanPropertyRowMapper(Movimiento.class),a,b,c);
             
         } catch (Exception ex) {
-            Logger.getLogger(ClientesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovimientosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return mv;
     }
+
+    public boolean ingresar(String a, Date b, int c) {
+     
+         int filas;
+        try {
+            String sql = "update movimientos set mo_fec=? and mo_imp=? where mo_ncu=? ";
+            JdbcTemplate jtm = new JdbcTemplate(DBConnection.getInstance().getDataSource());
+            filas = jtm.update(sql,b ,c, a);
+        } catch (DataAccessException e) {
+            Logger.getLogger(MovimientosDAO.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        }
+        if(filas>0){
+            return true;
+        }else
+        return false;
+    
+    }
+
+    
 }

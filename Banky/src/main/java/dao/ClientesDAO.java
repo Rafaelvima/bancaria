@@ -82,4 +82,20 @@ public class ClientesDAO {
         }else
         return false;
     }
+
+    public boolean updatemasCliente(Cliente c, int sal) {
+         int filas;
+        try {
+            String sql = "update clientes set cl_ncu=? and cl_sal=? ";
+            JdbcTemplate jtm = new JdbcTemplate(DBConnection.getInstance().getDataSource());
+            filas = jtm.update(sql, c.getCl_ncu()+1, c.getCl_sal()+sal);
+        } catch (DataAccessException e) {
+            Logger.getLogger(ClientesDAO.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        }
+        if(filas>0){
+            return true;
+        }else
+        return false;
+    }
 }

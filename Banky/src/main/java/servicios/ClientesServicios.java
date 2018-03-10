@@ -30,6 +30,11 @@ public class ClientesServicios {
      }
      public boolean updateCliente(Cliente c){
          ClientesDAO dao = new ClientesDAO();
-         return dao.addCliente(c);
+         return dao.updateCliente(c);
      }
+
+    public boolean updatemasCliente(Cliente c, int sal) {
+        ClientesDAO dao = new ClientesDAO();
+         return dao.updatemasCliente(c, sal);
+    }
     }

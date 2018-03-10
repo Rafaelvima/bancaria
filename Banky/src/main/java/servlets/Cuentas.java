@@ -29,7 +29,7 @@ import servicios.CuentasServicios;
  *
  * @author rafa
  */
-@WebServlet(name = "Cuentas", urlPatterns = {"/cuentas"})
+@WebServlet(name = "Cuentas", urlPatterns = {"/secure/cuentas"})
 public class Cuentas extends HttpServlet {
 
     /**
@@ -51,9 +51,14 @@ public class Cuentas extends HttpServlet {
         String op = request.getParameter("op");
         String numerocu = request.getParameter("cu_ncu");
         String ultimonum = numerocu.charAt(9)+"";
-        int numeor=Integer.parseInt(ultimonum);
-        int contador =0;        //123456789
-//        for(int i=0;i<numerocu.length();i++){
+//        int numeor=Integer.parseInt(ultimonum);
+//        int contador =0;        //123456789
+
+        String dn1cu = request.getParameter("cu_dn1");
+        String dn2cu = request.getParameter("cu_dn2");
+        String salariocu = request.getParameter("cu_sal");
+        int salarioNum = Integer.parseInt(salariocu);
+        //        for(int i=0;i<numerocu.length();i++){
 //            if(i<numerocu.length()-1){
 //            contador+=Integer.parseInt(numerocu.charAt(i)+"");
 //            }
@@ -67,10 +72,6 @@ public class Cuentas extends HttpServlet {
 //                    cu_ncu_correcto=false;
 //            }
 //        }
-        String dn1cu = request.getParameter("cu_dn1");
-        String dn2cu = request.getParameter("cu_dn2");
-        String salariocu = request.getParameter("cu_sal");
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         
         switch (op)
         {
@@ -84,7 +85,19 @@ public class Cuentas extends HttpServlet {
                 }
                 else{
                     if(existecli!=null){
-                        response.getWriter().write(jsoncli);
+                            if(salarioNum<1){
+                                if(dn2cu!=null){
+                             cus.addCuenta(numerocu,dn1cu,dn2cu,salarioNum);
+                             cls.updatemasCliente(existecli,salarioNum);
+                              response.getWriter().write("<h1> El cliente "+dn1cu+" con nombre "+existecli.getCl_nom()+ " ha ingresado una cuenta nueva junto con el dni "+dn2cu+"</h1>");
+                        }
+                        cus.addCuenta2(numerocu,dn1cu,salarioNum);
+                        response.getWriter().write("<h1> El cliente "+dn1cu+"con nombre"+existecli.getCl_nom()+ "ha ingresado una cuenta nueva</h1>");
+                            }
+                            else{
+                                response.getWriter().write("<h1> Debes introducir un importe</h1>");
+                            }
+                        
                     }
                     else{
                         response.getWriter().write("<h1> El cliente "+dn1cu+" no se encuentra en la base de datos, rellenar el formulario primero</h1>");
@@ -95,24 +108,14 @@ public class Cuentas extends HttpServlet {
                 break;
 
             case "delete":
-                //a.setId(Long.parseLong(id));
-                //as.delAlumno(a);
+             
 
-                break;
-            case "update":
-//                fechaDate = format.parse(fecha);
-//                a.setId(Long.parseLong(id));
-//                a.setNombre(nombre);
-//                a.setFecha_nacimiento(fechaDate);
-              
                 break;
             default:
-                //request.setAttribute("alumnos", ms.getAllMovimientos());
-                //request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+               
 
         }
-       // request.setAttribute("alumnos", as.getAllAlumnos());
-       // request.getRequestDispatcher("pintarListaAlumnos.jsp").forward(request, response);
+     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

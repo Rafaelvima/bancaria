@@ -24,17 +24,7 @@
             function cargarpag() {
 
             }
-            function iniciarSesion(){
-                $.ajax({
-                    type:"POST",
-                    url:"http://localhost:8083/Banky/clientes",
-                    data:$("#form1").serialize(),
-                        success : function (data){
-                            alert (data);
-                        }
-                    
-                })
-            }
+           
             function verMovimiento(){
                 $.ajax({
                     type:"POST",
@@ -52,7 +42,7 @@
                     url:"http://localhost:8083/Banky/cuentas",
                     data:$("#form3").serialize(),
                     success : function (data){
-                        var datos = JSON.parse(data);
+                        $("#output").append(data);
                         
                         }
                 })
@@ -78,18 +68,52 @@
                     
                 })
             }
+            function ingresarono(){
+                if(document.getElementById("ingresar").checked==checked){
+                    $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8083/Banky/movimientos",
+                    data:{mo_ncu:document.getElementById("mo_nocu").value,
+                           cu_sal:document.getElementById("cu_sal").value,
+                            op:"ingresar"},
+                        success : function (data){
+                           $("#output").append(data);
+                        }
+                    
+                })
+                }else{if(document.getElementById("retirar").checked==checked){
+                        $.ajax({
+                    type:"POST",
+                    url:"http://localhost:8083/Banky/movimientos",
+                    data:{mo_ncu:document.getElementById("mo_nocu").value,
+                           cu_sal:document.getElementById("cu_sal").value,
+                            op:"retirar"},
+                        success : function (data){
+                           $("#output").append(data);
+                        }
+                    
+                })
+                }else{
+                    alert("selecciona retirar o ingresar");
+                }
+                    
+                }
+                
+                
+            }
         </script>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <form id="form1" action="clientes" hidden="hidden">
+        <h1>Clientes</h1>
+        <form id="form1" action="clientes">
             <input type="hidden" value="iniciarS" id="op">
-        <input id="num_cuenta" value="1234567890">
-        <input id="dni1" value="12345678j">
-        <input id="dni2" value="12345678j">
-        <button id="opcli" name ="op" value="all"> all </button>
-        <input type="button"  onclick="crearCliente();">
+        Numero de cuenta<input id="num_cuenta" value="1234567890">
+        DNI1<input id="dni1" value="12345678j">
+        DNI2(opcional)<input id="dni2" value="12345678j">
+        <button id="opcli" name ="op" value="all"> all clientes </button>
+        <input type="button" value="añadir cliente" onclick="crearCliente();">
         </form>
+         <h1>Cuentas</h1>
          <form id="form3" action="cuentas">
         <input type="hidden" value="abrirCu" name="op" id="opcu">
         nºcuenta<input id="cu_ncu" name="cu_ncu" value="0000000011">
@@ -98,12 +122,21 @@
         salario (min 1)<input type="number" id="cu_sal" name="cu_sal" min="1" value="1">
         <input type="button" value="abrir cuenta" onclick="abrirCuenta();">
         </form>
+          <h1>Movimientos</h1>
         <form id="form2" action="movimientos">
         <input type="hidden" value="ver" name="op" id="opmovi">
-        <input id="mo_ncu" name="mo_ncu" value="0000000011">
-        <input id="fechaini" name="fechaini" type="date" >
-        <input id="fechafin" name="fechafin" type="date">
+      Numero de cuenta  <input id="mo_ncu" name="mo_ncu" value="0000000011">
+        Fecha inicio<input id="fechaini" name="fechaini" type="date" >
+       Fecha final <input id="fechafin" name="fechafin" type="date">
         <input type="button" value="ver movimientos" onclick="verMovimiento();">
+        </form>
+          <h1>Ingresar o reintegros</h1>
+        <form id="form4" action="movimientos">
+        <input type="hidden" value="ver" name="op" id="opmovi">
+      Numero de cuenta  <input id="mo_ncu" name="mo_ncu" value="0000000011">
+      Cantidad (min 1)<input type="number" id="cu_sal" name="cu_sal" min="1" value="1"><br>
+      Ingresar <input type="radio" id="ingresar" name="tipo" > retirar  <input type="radio" id="retirar" name="tipo">
+        <input type="button" value="ver movimientos" onclick="ingrsarono();">
         </form>
         <div id="output"></div> 
     </body>

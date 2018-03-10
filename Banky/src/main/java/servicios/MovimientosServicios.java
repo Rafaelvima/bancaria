@@ -32,6 +32,10 @@ public class MovimientosServicios
         devolver +="</table>";
         return devolver;
     }
+    public boolean ingresar(String a, Date b,int c){
+        MovimientosDAO dao = new MovimientosDAO();
+        return dao.ingresar(a,b,c);
+    }
 
    
 }
