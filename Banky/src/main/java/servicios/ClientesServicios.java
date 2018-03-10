@@ -19,4 +19,17 @@ public class ClientesServicios {
         ClientesDAO dao = new ClientesDAO();
         return dao.getAllClientesDBUils();
     }
+     
+     public Cliente existeCliente(String dni){
+         ClientesDAO dao = new ClientesDAO();
+         return dao.existeCliente(dni);
+     }
+     public boolean addCliente(Cliente c){
+         ClientesDAO dao = new ClientesDAO();
+         return dao.addCliente(c);
+     }
+     public boolean updateCliente(Cliente c){
+         ClientesDAO dao = new ClientesDAO();
+         return dao.addCliente(c);
+     }
     }

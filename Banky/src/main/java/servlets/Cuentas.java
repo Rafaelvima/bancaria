@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -19,7 +20,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Cliente;
 import model.Cuenta;
+import servicios.ClientesServicios;
+import servicios.CuentasServicios;
 
 /**
  *
@@ -41,27 +45,28 @@ public class Cuentas extends HttpServlet {
             throws ServletException, IOException, ParseException { 
         Cuenta m = new Cuenta();
         LocalDate local = LocalDate.of(1910, Month.MARCH, 12);
-        //CuentasServicios cus = new CuentasServicios();
+        CuentasServicios cus = new CuentasServicios();
+        ClientesServicios cls = new ClientesServicios();
         boolean cu_ncu_correcto = false;
         String op = request.getParameter("op");
         String numerocu = request.getParameter("cu_ncu");
         String ultimonum = numerocu.charAt(9)+"";
         int numeor=Integer.parseInt(ultimonum);
         int contador =0;        //123456789
-        for(int i=0;i<numerocu.length();i++){
-            if(i<numerocu.length()-1){
-            contador+=Integer.parseInt(numerocu.charAt(i)+"");
-            }
-            else{
-                if(contador%numerocu.length()==Integer.parseInt(ultimonum)){
-                    //numero de cuenta correcto
-                    cu_ncu_correcto=true;
-                }
-                else
-                    //numero de cuenta incorrecto
-                    cu_ncu_correcto=false;
-            }
-        }
+//        for(int i=0;i<numerocu.length();i++){
+//            if(i<numerocu.length()-1){
+//            contador+=Integer.parseInt(numerocu.charAt(i)+"");
+//            }
+//            else{
+//                if(contador%numerocu.length()==Integer.parseInt(ultimonum)){
+//                    //numero de cuenta correcto
+//                    cu_ncu_correcto=true;
+//                }
+//                else
+//                    //numero de cuenta incorrecto
+//                    cu_ncu_correcto=false;
+//            }
+//        }
         String dn1cu = request.getParameter("cu_dn1");
         String dn2cu = request.getParameter("cu_dn2");
         String salariocu = request.getParameter("cu_sal");
@@ -69,8 +74,22 @@ public class Cuentas extends HttpServlet {
         
         switch (op)
         {
-            case "insert":
-                //aqui hay que comprbar
+            case "abrirCu":
+                Cuenta existecu=cus.existeCuenta(numerocu);
+                Cliente existecli=cls.existeCliente(dn1cu);
+                String jsoncli = new Gson().toJson(existecli);
+                 String jsoncuenta = new Gson().toJson(existecu);
+                if(existecu !=null){
+                    response.getWriter().write("<h1> esta cuenta ya existe prueba con otra </h1>");
+                }
+                else{
+                    if(existecli!=null){
+                        response.getWriter().write(jsoncli);
+                    }
+                    else{
+                        response.getWriter().write("<h1> El cliente "+dn1cu+" no se encuentra en la base de datos, rellenar el formulario primero</h1>");
+                    }
+                }
                 
                
                 break;

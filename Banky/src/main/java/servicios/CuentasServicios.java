@@ -16,5 +16,10 @@ import model.Cuenta;
 public class CuentasServicios
 {
 
+    public Cuenta existeCuenta(String numerocu) {
+       CuentasDAO dao = new CuentasDAO();
+       return dao.existeCuenta(numerocu);
+    }
+
 
 }
